@@ -57,13 +57,11 @@ Shortcut | Action
 ---------|-------
 <kbd>CTRL</kbd>+<kbd>q</kbd> | Quit
 <kbd>CTRL</kbd>+<kbd>/</kbd> | Search
-<kbd>UP</kbd> | Switch to input above
-<kbd>DOWN</kbd> | Switch to input below
-<kbd>TAB</kbd> | Switch to next input
+<kbd>UP</kbd>, <kbd>DOWN</kbd>, <kbd>TAB</kbd> | Navigate
 <kbd>CTRL</kbd>+<kbd>j</kbd> | Scroll result list down
 <kbd>CTRL</kbd>+<kbd>k</kbd> | Scroll result list up
-<kbd>CTRL</kbd>+<kbd>s</kbd> | Save session to file
-<kbd>CTRL</kbd>+<kbd>l</kbd> | Load session from file
+<kbd>CTRL</kbd>+<kbd>s</kbd> | Save session
+<kbd>CTRL</kbd>+<kbd>l</kbd> | Load session
 
 ## Notes
 
