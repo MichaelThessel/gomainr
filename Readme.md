@@ -1,28 +1,28 @@
-# Domainr
+# Gomainr
 
 
 Terminal cli app that checks the availability of domains for different configurations of keywords.
 
-![Demo](https://raw.githubusercontent.com/MichaelThessel/domainr/master/assets/demo.gif)
+![Demo](https://raw.githubusercontent.com/MichaelThessel/gomainr/master/assets/demo.gif)
 
 ## Installation
 
 You need to have [Go](https://golang.org/) installed.
 
 ```
-# go get github.com/MichaelThessel/domainr
-# domainr
+# go get github.com/MichaelThessel/gomainr
+# gomainr
 ```
 
-Upon first execution domainr will create a config file, print the config path and exit. You will need to edit the configuration file, add your API credentials and start domainr again. The config file will be located at:
+Upon first execution gomainr will create a config file, print the config path and exit. You will need to edit the configuration file, add your API credentials and start gomainr again. The config file will be located at:
 
 ```
-# $HOME/.domainr/config
+# $HOME/.gomainr/config
 ```
 
 ## API Keys
 
-Currently domainr supports both the [NameCheap.com](https://www.namecheap.com/support/api/intro.aspx) and [GoDaddy.com](https://developer.godaddy.com/) APIs. To use the app you need to obtain an API key from either service.
+Currently gomainr supports both the [NameCheap.com](https://www.namecheap.com/support/api/intro.aspx) and [GoDaddy.com](https://developer.godaddy.com/) APIs. To use the app you need to obtain an API key from either service.
 
 To be allowed to use the NameCheap API you need to fullfill certain [conditions](https://www.namecheap.com/support/knowledgebase/article.aspx/9739/63/api--faq#c). It will also take up to 48 hours for NameCheap to activate your API access (if you ask nicely in the live chat they might do it right away though :). There are no restrictions for access to the GoDaddy API. Unless you already have a bunch of domains with NameCheap it's probably easiest to get a GoDaddy key.
 
@@ -65,10 +65,10 @@ Shortcut | Action
 
 ## Notes
 
-To speed up consecutive searches and to keep things light on the APIs domainr caches API request results for 24hrs. If you want to flush the cache for some reason you can delete the contents of this directory:
+To speed up consecutive searches and to keep things light on the APIs gomainr caches API request results for 24hrs. If you want to flush the cache for some reason you can delete the contents of this directory:
 
 ```
-# $HOME/.domainr/data
+# $HOME/.gomainr/data
 ```
 
 ## Thanks

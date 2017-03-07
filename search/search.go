@@ -1,8 +1,8 @@
 package search
 
 import (
-	"github.com/MichaelThessel/domainr/cache"
-	"github.com/MichaelThessel/domainr/search/source"
+	"github.com/MichaelThessel/gomainr/cache"
+	"github.com/MichaelThessel/gomainr/search/source"
 )
 
 // Search struct

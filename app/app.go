@@ -9,8 +9,8 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/MichaelThessel/domainr/file"
-	"github.com/MichaelThessel/domainr/search"
+	"github.com/MichaelThessel/gomainr/file"
+	"github.com/MichaelThessel/gomainr/search"
 
 	"github.com/jroimartin/gocui"
 )

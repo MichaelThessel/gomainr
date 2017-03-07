@@ -7,11 +7,11 @@ import (
 	"os"
 	"os/user"
 
-	"github.com/MichaelThessel/domainr/app"
-	"github.com/MichaelThessel/domainr/cache"
-	"github.com/MichaelThessel/domainr/file"
-	"github.com/MichaelThessel/domainr/search"
-	"github.com/MichaelThessel/domainr/search/source"
+	"github.com/MichaelThessel/gomainr/app"
+	"github.com/MichaelThessel/gomainr/cache"
+	"github.com/MichaelThessel/gomainr/file"
+	"github.com/MichaelThessel/gomainr/search"
+	"github.com/MichaelThessel/gomainr/search/source"
 
 	"github.com/BurntSushi/toml"
 )
@@ -64,7 +64,7 @@ func main() {
 // initPaths sets config and data storage paths
 func initPaths() error {
 	configFile := "config"
-	baseDir := ".domainr"
+	baseDir := ".gomainr"
 	dataDir := "data"
 
 	usr, err := user.Current()
