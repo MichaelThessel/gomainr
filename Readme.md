@@ -3,7 +3,7 @@
 
 Terminal cli app that checks the availability of domains for different configurations of keywords.
 
-[![asciicast](https://asciinema.org/a/106322.png)](https://asciinema.org/a/106322?autoplay=1)
+![Demo](https://raw.githubusercontent.com/MichaelThessel/gomainr/master/assets/demo.gif)
 
 ## Installation
 
