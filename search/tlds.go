@@ -1,5 +1,10 @@
 package search
 
+import (
+	"fmt"
+	"strings"
+)
+
 // Version 2017031200
 // see: http://data.iana.org/TLD/tlds-alpha-by-domain.txt
 var validTlds = []string{
@@ -1533,4 +1538,24 @@ var validTlds = []string{
 	"zone",
 	"zuerich",
 	"zw",
+}
+
+func ValidateTlds(tlds []string) error {
+	for _, tld := range tlds {
+		if err := validateTld(tld); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func validateTld(tld string) error {
+	tld = strings.ToLower(tld)
+	for _, vtld := range validTlds {
+		if tld == vtld {
+			return nil
+		}
+	}
+	return fmt.Errorf("Invalid TLD: %s", tld)
 }

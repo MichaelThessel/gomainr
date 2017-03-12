@@ -318,6 +318,13 @@ func (a *App) validate() bool {
 		return false
 	}
 
+	// Validate TLDs
+	tlds := a.parseLine(viewTLD)
+	if err := search.ValidateTlds(tlds); err != nil {
+		a.writeConsole(fmt.Sprintf("%s", err), true)
+		return false
+	}
+
 	return true
 }
 
