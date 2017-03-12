@@ -88,7 +88,7 @@ var vp = map[string]viewProperties{
 	},
 	viewSettings: {
 		title:    "Settings",
-		text:     "[ ] TLD substitutions",
+		text:     "",
 		x1:       0.0,
 		y1:       0.8,
 		x2:       1,
@@ -156,6 +156,7 @@ func (a *App) Layout(g *gocui.Gui) error {
 	}
 
 	a.updateState()
+	a.updateViews()
 
 	return nil
 }

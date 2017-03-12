@@ -23,10 +23,11 @@ type App struct {
 }
 
 type state struct {
-	Parts1  []string
-	Parts2  []string
-	Tlds    []string
-	Domains []string
+	Parts1   []string
+	Parts2   []string
+	Tlds     []string
+	Domains  []string
+	Settings map[string]bool
 }
 
 func New(s *search.Search) *App {
@@ -38,6 +39,12 @@ func New(s *search.Search) *App {
 	a.gui, err = gocui.NewGui(gocui.OutputNormal)
 	if err != nil {
 		log.Panicln(err)
+	}
+
+	// Default settings
+	a.state = new(state)
+	a.state.Settings = map[string]bool{
+		"TLDSubstitutions": false,
 	}
 
 	a.initGui()
@@ -100,6 +107,7 @@ func (a *App) search(g *gocui.Gui, v *gocui.View) error {
 		a.state.Parts1,
 		a.state.Parts2,
 		a.state.Tlds,
+		a.state.Settings["TLDSubstitutions"],
 	)
 
 	jobs := make(chan string, len(domains))
@@ -285,15 +293,14 @@ func (a *App) load(g *gocui.Gui, v *gocui.View) error {
 
 // toggleTLDSubstitutions toggles replacement of base domain ending with TLD
 func (a *App) toggleTLDSubsitutions(g *gocui.Gui, v *gocui.View) error {
-	if a.s.TLDSubstitutions {
-		a.writeView(viewSettings, "[ ] TLD substitutions")
-	} else {
-		a.writeView(viewSettings, "[X] TLD substitutions")
-	}
-
-	a.s.TLDSubstitutions = !a.s.TLDSubstitutions
+	a.setSetting("TLDSubstitutions", !a.state.Settings["TLDSubstitutions"])
 
 	return nil
+}
+
+// setSetting updates a setting
+func (a *App) setSetting(name string, value bool) {
+	a.state.Settings[name] = value
 }
 
 // validate validates that the required fields are populated
@@ -304,7 +311,7 @@ func (a *App) validate() bool {
 	}
 
 	// If TLD substitutions are disabled TLD needs to be set
-	if len(a.state.Tlds) == 0 && !a.s.TLDSubstitutions {
+	if len(a.state.Tlds) == 0 && !a.state.Settings["TLDSubstitutions"] {
 		a.writeConsole("\"TLDs\" cannot be empty! Please enter space seperated list of TLDs to scan.", true)
 		return false
 	}
@@ -314,11 +321,18 @@ func (a *App) validate() bool {
 
 // updateState saves the current state of views
 func (a *App) updateState() {
-	a.state = &state{
-		a.parseLine(viewPart1),
-		a.parseLine(viewPart2),
-		a.parseLine(viewTLD),
-		a.parseLine(viewDomain),
+	a.state.Parts1 = a.parseLine(viewPart1)
+	a.state.Parts2 = a.parseLine(viewPart2)
+	a.state.Tlds = a.parseLine(viewTLD)
+	a.state.Domains = a.parseLine(viewDomain)
+}
+
+// updateViews updates the views based on the current state
+func (a *App) updateViews() {
+	if a.state.Settings["TLDSubstitutions"] {
+		a.writeView(viewSettings, "[X] TLD substitutions")
+	} else {
+		a.writeView(viewSettings, "[ ] TLD substitutions")
 	}
 }
 

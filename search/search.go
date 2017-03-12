@@ -7,9 +7,8 @@ import (
 
 // Search struct
 type Search struct {
-	cache            *cache.Cache
-	source           source.Source
-	TLDSubstitutions bool
+	cache  *cache.Cache
+	source source.Source
 }
 
 var cacheTTL int64 = 86400
@@ -20,7 +19,6 @@ func New(source source.Source, cache *cache.Cache) *Search {
 
 	s.source = source
 	s.cache = cache
-	s.TLDSubstitutions = false
 
 	return s
 }
