@@ -52,6 +52,12 @@ func (a *App) setKeyBindings() error {
 		},
 		{
 			&selectableViews,
+			gocui.KeyCtrlR,
+			gocui.ModNone,
+			a.toggleTLDSubsitutions,
+		},
+		{
+			&selectableViews,
 			gocui.KeyCtrlJ,
 			gocui.ModNone,
 			a.scrollDown,

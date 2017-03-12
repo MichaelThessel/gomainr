@@ -283,6 +283,19 @@ func (a *App) load(g *gocui.Gui, v *gocui.View) error {
 	return nil
 }
 
+// toggleTLDSubstitutions toggles replacement of base domain ending with TLD
+func (a *App) toggleTLDSubsitutions(g *gocui.Gui, v *gocui.View) error {
+	if a.s.TLDSubstitutions {
+		a.writeView(viewSettings, "[ ] TLD substitutions")
+	} else {
+		a.writeView(viewSettings, "[X] TLD substitutions")
+	}
+
+	a.s.TLDSubstitutions = !a.s.TLDSubstitutions
+
+	return nil
+}
+
 // validate validates that the required fields are populated
 func (a *App) validate() bool {
 	if len(a.state.Parts1) == 0 {
@@ -290,7 +303,8 @@ func (a *App) validate() bool {
 		return false
 	}
 
-	if len(a.state.Tlds) == 0 {
+	// If TLD substitutions are disabled TLD needs to be set
+	if len(a.state.Tlds) == 0 && !a.s.TLDSubstitutions {
 		a.writeConsole("\"TLDs\" cannot be empty! Please enter space seperated list of TLDs to scan.", true)
 		return false
 	}

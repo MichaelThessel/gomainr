@@ -7,14 +7,15 @@ import (
 )
 
 const (
-	viewPart1   = "parts1"
-	viewPart2   = "parts2"
-	viewTLD     = "tlds"
-	viewDomain  = "domains"
-	viewConsole = "console"
-	viewKeys    = "keys"
-	viewSave    = "save"
-	viewLoad    = "load"
+	viewPart1    = "parts1"
+	viewPart2    = "parts2"
+	viewTLD      = "tlds"
+	viewDomain   = "domains"
+	viewConsole  = "console"
+	viewSettings = "settings"
+	viewKeys     = "keys"
+	viewSave     = "save"
+	viewLoad     = "load"
 )
 
 type viewProperties struct {
@@ -69,7 +70,7 @@ var vp = map[string]viewProperties{
 		x1:       0.0,
 		y1:       0.3,
 		x2:       1,
-		y2:       0.8,
+		y2:       0.7,
 		editor:   nil,
 		editable: false,
 		modal:    false,
@@ -77,6 +78,17 @@ var vp = map[string]viewProperties{
 	viewConsole: {
 		title:    "Console",
 		text:     "Please enter space seperated domain parts and TLDs!",
+		x1:       0.0,
+		y1:       0.7,
+		x2:       1,
+		y2:       0.8,
+		editor:   nil,
+		editable: false,
+		modal:    false,
+	},
+	viewSettings: {
+		title:    "Settings",
+		text:     "[X] TLD substitutions",
 		x1:       0.0,
 		y1:       0.8,
 		x2:       1,
@@ -87,7 +99,7 @@ var vp = map[string]viewProperties{
 	},
 	viewKeys: {
 		title:    "Keyboard shortcuts",
-		text:     "<CTL>/: find | <CTL>q: quit | <CTL>j: scroll results down | <CTL>k: scroll results up | <CTRL>s: save",
+		text:     "<CTL>/: find | <CTL>q: quit | <CTL>j: scroll results down | <CTL>k: scroll results up | <CTL>s: save | <CTL>r: toggle TLD substitutions",
 		x1:       0.0,
 		y1:       0.9,
 		x2:       1,
@@ -118,6 +130,7 @@ var views = []string{
 	viewTLD,
 	viewDomain,
 	viewConsole,
+	viewSettings,
 	viewKeys,
 	viewSave,
 }

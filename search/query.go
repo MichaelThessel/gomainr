@@ -2,7 +2,7 @@ package search
 
 import "strings"
 
-// BuildDomains builds domain names from given parts
+// BuildQuery builds domain names from given parts
 func (s *Search) BuildQuery(first []string, second []string, tlds []string) []string {
 	var baseDomains []string
 
@@ -26,7 +26,9 @@ func (s *Search) BuildQuery(first []string, second []string, tlds []string) []st
 	}
 
 	// Add TLD substiturion
-	tldSub(&baseDomains, &domains)
+	if s.TLDSubstitutions {
+		tldSub(&baseDomains, &domains)
+	}
 
 	return domains
 }
