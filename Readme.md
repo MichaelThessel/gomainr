@@ -75,5 +75,6 @@ This project utilizes the following 3rd party packages
 
 * [GOCUI](https://github.com/jroimartin/gocui)
 * [TOML](https://github.com/BurntSushi/toml)
+* [dnsr](https://github.com/domainr/dnsr)
 * [diskv](https://github.com/peterbourgon/diskv)
 * [go-namecheap](https://github.com/billputer/go-namecheap)
