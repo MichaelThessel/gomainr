@@ -110,6 +110,10 @@ func (a *App) search(g *gocui.Gui, v *gocui.View) error {
 		a.state.Settings["TLDSubstitutions"],
 	)
 
+	if len(domains) == 0 {
+		a.writeConsole("No possible searches!", true)
+	}
+
 	jobs := make(chan string, len(domains))
 	found := make(chan string)
 	complete := make(chan bool)
