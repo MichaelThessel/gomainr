@@ -53,27 +53,3 @@ func (s *Search) IsAvailable(domain string) (bool, error) {
 
 	return available, nil
 }
-
-// BuildDomains builds domain names from given parts
-func (s *Search) BuildDomains(first []string, second []string, tlds []string) []string {
-	var baseDomains []string
-	for i := 0; i < len(first); i++ {
-		if len(second) == 0 {
-			baseDomains = append(baseDomains, first[i])
-		} else {
-			for j := 0; j < len(second); j++ {
-				baseDomains = append(baseDomains, first[i]+second[j])
-			}
-		}
-	}
-
-	// Append TLDs
-	var domains []string
-	for i := 0; i < len(baseDomains); i++ {
-		for j := 0; j < len(tlds); j++ {
-			domains = append(domains, baseDomains[i]+"."+tlds[j])
-		}
-	}
-
-	return domains
-}

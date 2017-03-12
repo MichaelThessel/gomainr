@@ -96,7 +96,7 @@ func (a *App) search(g *gocui.Gui, v *gocui.View) error {
 	a.writeConsole("Searching ...", false)
 
 	// Generate domain list from parts
-	domains := a.s.BuildDomains(
+	domains := a.s.BuildQuery(
 		a.state.Parts1,
 		a.state.Parts2,
 		a.state.Tlds,
