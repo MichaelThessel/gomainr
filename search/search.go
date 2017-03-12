@@ -20,7 +20,7 @@ func New(source source.Source, cache *cache.Cache) *Search {
 
 	s.source = source
 	s.cache = cache
-	s.TLDSubstitutions = true
+	s.TLDSubstitutions = false
 
 	return s
 }

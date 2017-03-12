@@ -88,7 +88,7 @@ var vp = map[string]viewProperties{
 	},
 	viewSettings: {
 		title:    "Settings",
-		text:     "[X] TLD substitutions",
+		text:     "[ ] TLD substitutions",
 		x1:       0.0,
 		y1:       0.8,
 		x2:       1,
