@@ -20,7 +20,7 @@ The main purpose of this tool is to find available domains for different keyword
 
 * Keywords 1: foo bar
 * Keywords 2: alice bob
-* Tlds: com net
+* TLDs: com net
 
 Will search for:
 
@@ -39,6 +39,12 @@ Keywords 2 is optional, so you can just search for various domains among differe
 
 You can save a session to a file and load it later again. This way you can view the results again without performing a new search. In addition this allows you to modify the keywords and repeat a search without typing the keywords all over again.
 
+**TLD Substitution**
+
+You can enable TLD substitution which will check if the end of your domain could be replaced by a TLD. I.e.:
+
+fishnet - fish.net
+
 ## Keyboard Shortcuts
 
 Shortcut | Action
@@ -48,6 +54,7 @@ Shortcut | Action
 <kbd>UP</kbd>, <kbd>DOWN</kbd>, <kbd>TAB</kbd> | Navigate
 <kbd>CTRL</kbd>+<kbd>j</kbd> | Scroll result list down
 <kbd>CTRL</kbd>+<kbd>k</kbd> | Scroll result list up
+<kbd>CTRL</kbd>+<kbd>r</kbd> | Toggle TLD substitution
 <kbd>CTRL</kbd>+<kbd>s</kbd> | Save session
 <kbd>CTRL</kbd>+<kbd>l</kbd> | Load session
 
