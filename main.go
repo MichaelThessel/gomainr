@@ -23,6 +23,7 @@ type configPaths struct {
 }
 
 type config struct {
+	DNS       *source.DNSConfig
 	NameCheap *source.NameCheapConfig
 	GoDaddy   *source.GoDaddyConfig
 }
@@ -36,15 +37,9 @@ func init() {
 		log.Panic(err)
 	}
 
-	configCreated, err := generateConfig()
+	err := generateConfig()
 	if err != nil {
 		log.Panic(err)
-	}
-
-	// Exit with message that new config file has been created
-	if configCreated {
-		fmt.Println("New configuration created please update:", cp.configFile)
-		os.Exit(1)
 	}
 
 	if err := loadConfig(); err != nil {
@@ -84,9 +79,11 @@ func initPaths() error {
 // initSearch initializes the searcher
 func initSearch() *search.Search {
 	var searchSource source.Source
-	if c.NameCheap.Enabled {
+	if c.DNS != nil && c.DNS.Enabled {
+		searchSource = source.Get(c.DNS, source.DNSSource)
+	} else if c.NameCheap != nil && c.NameCheap.Enabled {
 		searchSource = source.Get(c.NameCheap, source.NameCheapSource)
-	} else if c.GoDaddy.Enabled {
+	} else if c.GoDaddy != nil && c.GoDaddy.Enabled {
 		searchSource = source.Get(c.GoDaddy, source.GoDaddySource)
 	} else {
 		fmt.Println("No search source enabled please update:", cp.configFile)
@@ -98,27 +95,26 @@ func initSearch() *search.Search {
 }
 
 // generateConfig generates config files and directories
-func generateConfig() (bool, error) {
-	created := false
+func generateConfig() error {
 	// Create base directory
 	err := file.CreateDirectory(cp.baseDir, 0700)
 	if err != nil {
-		return created, err
+		return err
 	}
 
 	// Create data directory
 	err = file.CreateDirectory(cp.dataDir, 0700)
 	if err != nil {
-		return created, err
+		return err
 	}
 
 	// Create config file
-	created, err = createConfigFile(cp.configFile)
+	err = createConfigFile(cp.configFile)
 	if err != nil {
-		return created, err
+		return err
 	}
 
-	return created, nil
+	return nil
 }
 
 // loadConfig loads the configuration from the config file
@@ -137,29 +133,31 @@ func loadConfig() error {
 }
 
 // createConfigFile creates the default config file
-func createConfigFile(fileName string) (bool, error) {
+func createConfigFile(fileName string) error {
 	fd, created, err := file.CreateFile(fileName)
 
 	if err != nil {
-		return created, err
+		return err
 	}
 
 	// Exit if no new file was created
 	if created == false {
-		return created, nil
+		return nil
 	}
 
 	err = initConfig(fd)
 	if err != nil {
-		return created, err
+		return err
 	}
 
-	return created, nil
+	return nil
 }
 
 // initConfig writes the default config to config file
 func initConfig(fd *os.File) error {
-	defaultConfig := `[namecheap]
+	defaultConfig := `[dns]
+Enabled = true
+[namecheap]
 APIUser = ""
 APIToken = ""
 UserName = ""

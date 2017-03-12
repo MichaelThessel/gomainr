@@ -1,6 +1,7 @@
 package source
 
 const (
+	DNSSource       = "dns"
 	GoDaddySource   = "gds"
 	NameCheapSource = "ncs"
 )
@@ -13,6 +14,8 @@ type Source interface {
 // Get returns a search source
 func Get(config interface{}, sourceType string) Source {
 	switch sourceType {
+	case DNSSource:
+		return NewDNS(config.(*DNSConfig)).(Source)
 	case GoDaddySource:
 		return NewGoDaddy(config.(*GoDaddyConfig)).(Source)
 	case NameCheapSource:
