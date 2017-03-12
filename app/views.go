@@ -200,8 +200,7 @@ func (a *App) createView(viewName string, x1, y1, x2, y2 int) error {
 
 // setSelectableView set the focus to the view specified by id
 func (a *App) setSelectableView(id int) error {
-	err := a.setView(selectableViews[id])
-	if err != nil {
+	if err := a.setView(selectableViews[id]); err != nil {
 		return err
 	}
 	a.currentView = id
@@ -211,8 +210,7 @@ func (a *App) setSelectableView(id int) error {
 
 // setView set the focus to the view specified by name
 func (a *App) setView(name string) error {
-	_, err := a.gui.SetCurrentView(name)
-	if err != nil {
+	if _, err := a.gui.SetCurrentView(name); err != nil {
 		return err
 	}
 

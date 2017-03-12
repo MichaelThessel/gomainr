@@ -251,8 +251,7 @@ func (a *App) save(g *gocui.Gui, v *gocui.View) error {
 		return nil
 	}
 
-	_, err = fd.Write(json)
-	if err != nil {
+	if _, err := fd.Write(json); err != nil {
 		a.writeConsole(fmt.Sprintf("Couldn't write to file: %s", saveFile), false)
 		return nil
 	}
@@ -273,8 +272,7 @@ func (a *App) load(g *gocui.Gui, v *gocui.View) error {
 		return nil
 	}
 
-	err = json.Unmarshal(data, a.state)
-	if err != nil {
+	if err := json.Unmarshal(data, a.state); err != nil {
 		a.writeConsole(fmt.Sprintf("Couldn't parse file: %s", loadFile), false)
 		return nil
 	}

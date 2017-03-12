@@ -37,8 +37,7 @@ func init() {
 		log.Panic(err)
 	}
 
-	err := generateConfig()
-	if err != nil {
+	if err := generateConfig(); err != nil {
 		log.Panic(err)
 	}
 
@@ -97,20 +96,17 @@ func initSearch() *search.Search {
 // generateConfig generates config files and directories
 func generateConfig() error {
 	// Create base directory
-	err := file.CreateDirectory(cp.baseDir, 0700)
-	if err != nil {
+	if err := file.CreateDirectory(cp.baseDir, 0700); err != nil {
 		return err
 	}
 
 	// Create data directory
-	err = file.CreateDirectory(cp.dataDir, 0700)
-	if err != nil {
+	if err := file.CreateDirectory(cp.dataDir, 0700); err != nil {
 		return err
 	}
 
 	// Create config file
-	err = createConfigFile(cp.configFile)
-	if err != nil {
+	if err := createConfigFile(cp.configFile); err != nil {
 		return err
 	}
 
@@ -124,8 +120,7 @@ func loadConfig() error {
 		return err
 	}
 
-	_, err = toml.Decode(string(configData), &c)
-	if err != nil {
+	if _, err := toml.Decode(string(configData), &c); err != nil {
 		return err
 	}
 
@@ -145,8 +140,7 @@ func createConfigFile(fileName string) error {
 		return nil
 	}
 
-	err = initConfig(fd)
-	if err != nil {
+	if err := initConfig(fd); err != nil {
 		return err
 	}
 

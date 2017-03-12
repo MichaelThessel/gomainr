@@ -62,8 +62,7 @@ func (gd *GoDaddy) IsAvailable(domain string) (bool, error) {
 	}
 
 	var gdResponse goDaddyResponse
-	err = json.Unmarshal(body, &gdResponse)
-	if err != nil {
+	if err := json.Unmarshal(body, &gdResponse); err != nil {
 		return false, errors.New("Couldn't parse API response")
 	}
 
