@@ -66,7 +66,7 @@ func (a *App) Close() {
 
 // initGui initializes the GUI
 func (a *App) initGui() {
-	lineEditor = LineEditor{gocui.DefaultEditor}
+	le = lineEditor{gocui.DefaultEditor}
 
 	// Defaults
 	a.gui.Cursor = true

@@ -4,14 +4,14 @@ import (
 	"github.com/jroimartin/gocui"
 )
 
-type LineEditor struct {
+type lineEditor struct {
 	gocuiEditor gocui.Editor
 }
 
-var lineEditor LineEditor
+var le lineEditor
 
 // Edit sets up input handling
-func (e *LineEditor) Edit(v *gocui.View, key gocui.Key, ch rune, mod gocui.Modifier) {
+func (e *lineEditor) Edit(v *gocui.View, key gocui.Key, ch rune, mod gocui.Modifier) {
 	switch key {
 	// Disable line wrapping
 	case gocui.KeyEnter:
