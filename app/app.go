@@ -267,7 +267,7 @@ func (a *App) save(g *gocui.Gui, v *gocui.View) error {
 	return nil
 }
 
-// save saves the current state to a file
+// load loads state from a file
 func (a *App) load(g *gocui.Gui, v *gocui.View) error {
 	loadFile := strings.TrimSpace(v.Buffer())
 	data, err := file.ReadFile(loadFile)
