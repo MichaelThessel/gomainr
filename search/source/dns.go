@@ -11,22 +11,23 @@ type DNSConfig struct {
 
 // DNS handles checking availablility of domain names via DNS
 type DNS struct {
-	config *DNSConfig
+	config   *DNSConfig
+	resolver *dnsr.Resolver
 }
 
 // NewDNS returns a new DNS instance
 func NewDNS(config *DNSConfig) Source {
-	dns := new(DNS)
-
-	dns.config = config
-
-	return dns
+	return &DNS{
+		config:   config,
+		resolver: dnsr.New(0),
+	}
 }
 
 // IsAvailable checks if a domain is available
-func (dns *DNS) IsAvailable(domain string) (bool, error) {
-	r := dnsr.New(100000)
-	_, err := r.ResolveErr(domain, "TXT")
-
-	return err != nil && err == dnsr.NXDOMAIN, nil
+func (dns *DNS) IsAvailable(domain string) (_ bool, err error) {
+	_, err = dns.resolver.ResolveErr(domain, "TXT")
+	if err == dnsr.NXDOMAIN {
+		return true, nil
+	}
+	return
 }
