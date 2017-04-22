@@ -124,7 +124,7 @@ func (a *App) search(g *gocui.Gui, v *gocui.View) error {
 	close(jobs)
 
 	// Create the workers that fetch available domain names
-	workerCount := len(domains)
+	workerCount := 4
 	var apiErr error
 	for i := 0; i < workerCount; i++ {
 		go func(jobs <-chan string, found chan<- string, complete chan<- bool) {
