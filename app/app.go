@@ -147,7 +147,7 @@ func (a *App) search(g *gocui.Gui, v *gocui.View) error {
 	go func(found <-chan string) {
 		for domain := range found {
 			foundDomains = append(foundDomains, domain)
-			a.gui.Execute(func(g *gocui.Gui) error {
+			a.gui.Update(func(g *gocui.Gui) error {
 				sort.Strings(foundDomains)
 
 				a.writeView(viewDomain, decorate(strings.Join(foundDomains, "\n"), "blue"))
@@ -155,7 +155,7 @@ func (a *App) search(g *gocui.Gui, v *gocui.View) error {
 			})
 		}
 
-		a.gui.Execute(func(g *gocui.Gui) error {
+		a.gui.Update(func(g *gocui.Gui) error {
 			if apiErr != nil {
 				a.writeConsole(
 					fmt.Sprintf("API error: %s", apiErr),
