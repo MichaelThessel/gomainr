@@ -20,7 +20,7 @@ func (e *lineEditor) Edit(v *gocui.View, key gocui.Key, ch rune, mod gocui.Modif
 	// Disable line wrapping (right arrow key at line end wraps too)
 	case gocui.KeyArrowRight:
 		x, _ := v.Cursor()
-		if x >= len(v.ViewBuffer())-2 {
+		if x >= len(v.ViewBuffer())-1 {
 			return
 		}
 
